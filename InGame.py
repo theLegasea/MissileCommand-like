@@ -22,6 +22,7 @@ enemies = []
 cursor = Cursor.Cursor(screen)
 groundObj = GroundObj.GroundObj(screen)
 gui = GuiStuff.GuiStuff(screen)
+enemy = EnemyStuff.Enemy(screen)
 
 
 while running:
@@ -52,6 +53,9 @@ while running:
                 if projectile.checkCollision(enemy):
                     enemies.remove(enemy)
                     gui.score += 100
+    for enemy in enemies:
+        enemy.update(dt)
+        enemy.draw()
 
 
 
@@ -63,6 +67,19 @@ while running:
     # cursor stuff
     cursor.draw()
     cursor.update()
+    # enemy stuff
+    if gui.difficultyLevel == 0 and len(enemies) < 6 and pygame.time.get_ticks() % 3000 < dt * 1000:
+        new_enemy = EnemyStuff.Enemy(screen)
+        new_enemy.speed = 25
+        enemies.append(new_enemy)
+    elif gui.difficultyLevel == 1 and len(enemies) < 10 and pygame.time.get_ticks() % 2500 < dt * 1000:
+        new_enemy = EnemyStuff.Enemy(screen)
+        new_enemy.speed = 50
+        enemies.append(new_enemy)
+    elif gui.difficultyLevel == 2 and len(enemies) < 15 and pygame.time.get_ticks() % 2500 < dt * 1000:
+        new_enemy = EnemyStuff.Enemy(screen)
+        new_enemy.speed = 75
+        enemies.append(new_enemy)
 
     pygame.display.flip()
     dt = clock.tick(60) / 1000

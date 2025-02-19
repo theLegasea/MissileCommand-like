@@ -1,4 +1,6 @@
-﻿import pygame
+﻿import random
+
+import pygame
 
 # enemies spawn at a random x position at the top of the screen
 # they move downwards at a constant speed
@@ -7,11 +9,11 @@
 class Enemy:
     def __init__(self, screen):
         self.screen = screen
-        self.x = 0
-        self.y = 0
         self.width = 10
         self.height = 10
         self.color = "red"
+        self.x = random.randint(0, screen.get_width() - self.width)
+        self.y = 0
         self.speed = 100
 
     def draw(self):

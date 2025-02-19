@@ -20,6 +20,7 @@ class GroundObj:
         pygame.draw.rect(self.screen, self.color, self.base2)
         pygame.draw.rect(self.screen, self.color, self.base3)
 
+        # drawing the barrels
         def calculate_line_end(start_x, start_y):
             dx = mouse_x - start_x
             dy = mouse_y - start_y
@@ -34,10 +35,4 @@ class GroundObj:
             end_pos = calculate_line_end(*start_pos)
             pygame.draw.line(self.screen, "black", start_pos, end_pos)
 
-
-
-    def checkCollision(self, enemy):
-        if enemy.y + enemy.height >= self.playerFloor:
-            return True
-        return False
 
